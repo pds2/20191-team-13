@@ -1,6 +1,11 @@
 #include <iostream>
+#include "game.hpp"
+#include "game_state_menu.hpp"
 
 int main(){
-    std::cout << "adjh" << std::endl;
+    Game game;
+    game.pushState(new GameStateMenu(&game));
+    game.gameLoop();
+
     return 0;
 }
