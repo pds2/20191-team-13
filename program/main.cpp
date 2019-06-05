@@ -1,6 +1,6 @@
 #include <iostream>
 #include "game.hpp"
-#include "game_state_menu.hpp"
+#include "menu.hpp"
 
 int main(){
     Game game;

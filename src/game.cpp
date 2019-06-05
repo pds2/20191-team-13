@@ -14,6 +14,14 @@
 #include "game_state.hpp"
 
 
+Game::Game(){
+
+}
+
+Game::~Game(){
+    while(!this->states.empty()) this->popState();
+}
+
 void Game::pushState(GameState* state){
     this->states.push(state);
 }
@@ -43,7 +51,7 @@ void Game::gameLoop(){
         this->peekState()->display();
 
         while(!this->errorStack.empty()){
-            std::cout << "[ERRO]" << this->errorStack.top() << std::endl;
+            std::cout << "[ERRO] " << this->errorStack.top() << std::endl;
             this->errorStack.pop();
         }
 
@@ -52,10 +60,11 @@ void Game::gameLoop(){
 
         //tratamento de entrada inválida
         try{
-            this->peekState()->handleInput(userInput);
-            this->peekState()->update(userInput);
+            GameState* currentState = this->peekState();
+            currentState->handleInput(userInput);
+            currentState->update(userInput);
         }catch (const char* &e){
-            std::string tmp = e;
+            // std::string tmp = e;
             this->errorStack.push(e);
         }
     }
@@ -63,12 +72,4 @@ void Game::gameLoop(){
 
 void Game::quit(){
     this->state_endgame = true;
-}
-
-Game::Game(){
-
-}
-
-Game::~Game(){
-    while(!this->states.empty()) this->popState();
 }

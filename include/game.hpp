@@ -10,8 +10,10 @@ private:
     std::stack<std::string> errorStack;
 
 public:
-
     std::stack<GameState*> states;
+
+    Game();
+    ~Game();
 
     void pushState(GameState* state);
     void changeState(GameState* state);
@@ -23,6 +25,5 @@ public:
 
     void gameLoop();
 
-    Game();
-    ~Game();
+
 };
