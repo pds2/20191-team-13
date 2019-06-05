@@ -21,7 +21,7 @@ void GameStateMenu::update(std::string userInput){
 
 void GameStateMenu::handleInput(std::string userInput){
     std::string ui = userInput;
-    for(int i=0; i<ui.length(); i++){
+    for(int i=0; i<(int)ui.length(); i++){
         ui[i] = tolower(ui[i]);
     }
 

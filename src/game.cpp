@@ -1,4 +1,4 @@
-#ifdef linux
+#ifdef __unix__
 #include <stdlib.h>
 #define CLEAR_SCREEN() system("clear")
 #endif
@@ -60,6 +60,7 @@ void Game::gameLoop(){
         }
     }
 }
+
 void Game::quit(){
     this->state_endgame = true;
 }
