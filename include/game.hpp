@@ -4,23 +4,25 @@
 class GameState;
 
 class Game{
-    
-        
+private:
+    bool state_endgame = 0;
 
-    public:
-        bool state_end = false;
+    std::stack<std::string> errorStack;
 
-        std::stack<GameState*> states;
+public:
 
-        void pushState(GameState* state);
-        void changeState(GameState* state);
-        void popState();
+    std::stack<GameState*> states;
 
-        GameState* peekState();
+    void pushState(GameState* state);
+    void changeState(GameState* state);
+    void popState();
 
-        void gameLoop();
+    void quit();
 
-        Game();
-        ~Game();
+    GameState* peekState();
 
+    void gameLoop();
+
+    Game();
+    ~Game();
 };

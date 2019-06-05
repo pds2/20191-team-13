@@ -1,9 +1,17 @@
+#ifdef linux
+#include <stdlib.h>
+#define CLEAR_SCREEN() system("clear")
+#endif
+
+#ifdef _WIN32
+#include <stdlib.h>
+#define CLEAR_SCREEN() system("cls")
+#endif
+
 #include <string>
 #include <iostream>
-#include <stdlib.h>
-
-#include "../include/game.hpp"
-#include "../include/game_state.hpp"
+#include "game.hpp"
+#include "game_state.hpp"
 
 
 void Game::pushState(GameState* state){
@@ -28,16 +36,32 @@ GameState* Game::peekState(){
 }
 
 void Game::gameLoop(){
-    std::string userInput;    
+    std::string userInput;
     while(true){
-        if (this->state_end) break;
-        system("cls");
+        if (this->state_endgame) break;
+        CLEAR_SCREEN();
         this->peekState()->display();
-        std::cout << "==> ";      
+
+        while(!this->errorStack.empty()){
+            std::cout << "[ERRO]" << this->errorStack.top() << std::endl;
+            this->errorStack.pop();
+        }
+
+        std::cout << "==> ";
         std::cin >> userInput;
-        this->peekState()->handleInput(userInput);
-        this->peekState()->update(userInput);        
+
+        //tratamento de entrada inválida
+        try{
+            this->peekState()->handleInput(userInput);
+            this->peekState()->update(userInput);
+        }catch (const char* &e){
+            std::string tmp = e;
+            this->errorStack.push(e);
+        }
     }
+}
+void Game::quit(){
+    this->state_endgame = true;
 }
 
 Game::Game(){

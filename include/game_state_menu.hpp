@@ -5,10 +5,8 @@
 #include "game_state.hpp"
 #include "game.hpp"
 
-class GameStateMenu : public GameState {
-    private:
-        //TODO: SelectionList
 
+class GameStateMenu : public GameState {
     public:
         virtual void display();
         virtual void update(std::string userInput);
