@@ -12,10 +12,10 @@
 #include <iostream>
 #include "game.hpp"
 #include "game_state.hpp"
-
+#include "player.h"
 
 Game::Game(){
-
+    player = Player();
 }
 
 Game::~Game(){

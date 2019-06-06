@@ -1,5 +1,6 @@
 #pragma once
 #include <stack>
+#include "player.h"
 
 class GameState;
 
@@ -9,6 +10,7 @@ private:
 
     std::stack<std::string> errorStack;
 
+    Player player;
 public:
     std::stack<GameState*> states;
 
