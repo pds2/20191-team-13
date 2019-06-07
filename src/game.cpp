@@ -44,10 +44,10 @@ GameState* Game::peekState(){
 }
 
 void Game::gameLoop(){
-    std::string userInput;
+    std::string userInput = "";
     while(true){
         if (this->state_endgame) break;
-        CLEAR_SCREEN();
+        // CLEAR_SCREEN();
         this->peekState()->display();
 
         while(!this->errorStack.empty()){
@@ -62,7 +62,8 @@ void Game::gameLoop(){
         try{
             GameState* currentState = this->peekState();
             currentState->handleInput(userInput);
-            currentState->update(userInput);
+            userInput = "";
+            currentState->update();
         }catch (const char* &e){
             // std::string tmp = e;
             this->errorStack.push(e);

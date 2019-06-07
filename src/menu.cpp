@@ -1,6 +1,10 @@
 #include <iostream>
 
+#include "helpers.h"
 #include "menu.hpp"
+#include "battle.h"
+#include "enemy.h"
+#include "enemies/basic.h"
 //#include "game_state_map.hpp"
 
 using std::cout;
@@ -20,17 +24,12 @@ void GameStateMenu::display(){
     cout << "-------------------------" << endl;
 }
 
-void GameStateMenu::update(std::string userInput){
+void GameStateMenu::update(){
     return;
 }
 
 void GameStateMenu::handleInput(std::string userInput){
-    std::string ui = userInput;
-
-    for(int i = (int) ui.length(); i >= 0; --i){
-        ui[i] = tolower(ui[i]);
-    }
-
+    std::string ui = Helpers::lowerString(userInput);
 
     if (ui == "s"){
         this->game->quit();
@@ -41,8 +40,15 @@ void GameStateMenu::handleInput(std::string userInput){
 
     if (ui == "c") return;//this->game->loadGame();
 
+
+    //Test purpose only
+    if(ui == "b"){
+        Enemy* enemy = new Basic(10, 1, 1);
+        this->game->pushState(new Battle(this->game, enemy));
+        return;
+    }
     //tratamento de entrada inválida
-    throw "opcao invalida! escolha uma da lista/verifique se digitou corretamente.";
+    throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
 }
 
 

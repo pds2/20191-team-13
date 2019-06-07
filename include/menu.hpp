@@ -9,7 +9,7 @@
 class GameStateMenu : public GameState {
     public:
         virtual void display();
-        virtual void update(std::string userInput);
+        virtual void update();
         virtual void handleInput(std::string userInput);
 
         GameStateMenu(Game* game);

@@ -1,6 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <iostream>
+
 class Enemy {
 private:
 	int health, attack, defense;
@@ -10,6 +12,7 @@ public:
 	virtual int getHealth() = 0;
 	virtual int getAttack() = 0;
 	virtual void takeDamage(int damage) = 0;
+	virtual std::string getBattleText() = 0;
 	virtual ~Enemy(){};
 };
 
