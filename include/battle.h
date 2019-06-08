@@ -7,7 +7,7 @@
 
 class Battle: public GameState {
 private:
-	bool playerTurn;
+	bool playerTurn, playerRan, battleEnded, playerWon;
 	Enemy* enemy;
 public:
 	Battle();
@@ -17,6 +17,8 @@ public:
 	virtual void display();
 	virtual void update();
 	virtual void handleInput(std::string userInput);
+
+	void runFromBattle();
 };
 
 #endif

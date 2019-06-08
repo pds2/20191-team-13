@@ -13,13 +13,15 @@ private:
     Player player;
 public:
     std::stack<GameState*> states;
-
+    bool needsUserInput = true;
     Game();
     ~Game();
 
     void pushState(GameState* state);
     void changeState(GameState* state);
     void popState();
+
+    Player* getPlayer();
 
     void quit();
 

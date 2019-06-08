@@ -15,62 +15,69 @@
 #include "player.h"
 
 Game::Game(){
-    player = Player();
+	player = Player(20, 2, 2);
 }
 
 Game::~Game(){
-    while(!this->states.empty()) this->popState();
+	while(!this->states.empty()) this->popState();
 }
 
 void Game::pushState(GameState* state){
-    this->states.push(state);
+	this->states.push(state);
 }
 
 void Game::popState(){
-    delete this->states.top();
-    this->states.pop();
+	delete this->states.top();
+	this->states.pop();
 }
 
 void Game::changeState(GameState* state){
-    if(!this->states.empty()){
-        this->popState();
-        this->pushState(state);
-    }
+	if(!this->states.empty()){
+		this->popState();
+		this->pushState(state);
+	}
 }
 
 GameState* Game::peekState(){
-    if (this->states.empty()) return nullptr;
-    return this->states.top();
+	if (this->states.empty()) return nullptr;
+	return this->states.top();
 }
 
 void Game::gameLoop(){
-    std::string userInput = "";
-    while(true){
-        if (this->state_endgame) break;
-        // CLEAR_SCREEN();
-        this->peekState()->display();
+	std::string userInput = "";
+	while(true){
+		if (this->state_endgame) break;
+		// CLEAR_SCREEN();
+		this->peekState()->display();
 
-        while(!this->errorStack.empty()){
-            std::cout << "[ERRO] " << this->errorStack.top() << std::endl;
-            this->errorStack.pop();
-        }
+		while(!this->errorStack.empty()){
+			std::cout << "[ERRO] " << this->errorStack.top() << std::endl;
+			this->errorStack.pop();
+		}
 
-        std::cout << "==> ";
-        std::cin >> userInput;
+		if(this->needsUserInput){
+			std::cout << "==> ";
+			std::cin >> userInput;
+			std::cout << std::endl;
+		}
 
-        //tratamento de entrada inválida
-        try{
-            GameState* currentState = this->peekState();
-            currentState->handleInput(userInput);
-            userInput = "";
-            currentState->update();
-        }catch (const char* &e){
-            // std::string tmp = e;
-            this->errorStack.push(e);
-        }
-    }
+		//tratamento de entrada inválida
+		try{
+			GameState* currentState = this->peekState();
+			currentState->handleInput(userInput);
+			userInput = "";
+			currentState->update();
+		}catch (const char* &e){
+			// std::string tmp = e;
+			this->errorStack.push(e);
+		}
+	}
+}
+
+Player* Game::getPlayer(){
+	return &this->player;
 }
 
 void Game::quit(){
-    this->state_endgame = true;
+	this->state_endgame = true;
 }

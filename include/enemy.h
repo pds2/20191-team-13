@@ -4,15 +4,18 @@
 #include <iostream>
 
 class Enemy {
-private:
+protected:
 	int health, attack, defense;
+	int fleeRate;
 public:
 	Enemy(int health, int attack, int defense);
-	virtual void makeAttack() = 0;
 	virtual int getHealth() = 0;
 	virtual int getAttack() = 0;
-	virtual void takeDamage(int damage) = 0;
+	virtual int getFleeRate() = 0;
+	virtual int takeDamage(int enemyAttack) = 0;
+	virtual std::string getName() = 0;
 	virtual std::string getBattleText() = 0;
+	virtual std::string getQuote() = 0;
 	virtual ~Enemy(){};
 };
 

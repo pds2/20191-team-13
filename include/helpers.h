@@ -13,6 +13,10 @@ public:
 
 		return str;
 	}
+
+	static int randomPercentage(){
+		return rand() % 100 + 1;
+	}
 };
 
 #endif

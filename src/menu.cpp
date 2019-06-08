@@ -4,7 +4,7 @@
 #include "menu.hpp"
 #include "battle.h"
 #include "enemy.h"
-#include "enemies/basic.h"
+#include "enemies/clek.h"
 //#include "game_state_map.hpp"
 
 using std::cout;
@@ -43,7 +43,7 @@ void GameStateMenu::handleInput(std::string userInput){
 
     //Test purpose only
     if(ui == "b"){
-        Enemy* enemy = new Basic(10, 1, 1);
+        Enemy* enemy = new Clek(10, 1, 1);
         this->game->pushState(new Battle(this->game, enemy));
         return;
     }
