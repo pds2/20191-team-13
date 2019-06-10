@@ -1,4 +1,4 @@
-#include "enemy.h"
+#include "enemy.hpp"
 
 
 Enemy::Enemy(int health, int attack, int defense):

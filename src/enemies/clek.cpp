@@ -1,5 +1,5 @@
 #include <iostream>
-#include "enemies/clek.h"
+#include "enemies/clek.hpp"
 
 Clek::Clek(int health, int attack, int defense): Enemy(health, attack, defense){
 	this->fleeRate = 100;

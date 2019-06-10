@@ -12,7 +12,7 @@
 #include <iostream>
 #include "game.hpp"
 #include "game_state.hpp"
-#include "player.h"
+#include "player.hpp"
 
 Game::Game(){
 	player = Player(20, 2, 2);
@@ -47,7 +47,7 @@ void Game::gameLoop(){
 	std::string userInput = "";
 	while(true){
 		if (this->state_endgame) break;
-		// CLEAR_SCREEN();
+		CLEAR_SCREEN();
 		this->peekState()->display();
 
 		while(!this->errorStack.empty()){
@@ -55,13 +55,13 @@ void Game::gameLoop(){
 			this->errorStack.pop();
 		}
 
-		if(this->needsUserInput){
+		if(true/**this->needsUserInput*/){
 			std::cout << "==> ";
 			std::cin >> userInput;
 			std::cout << std::endl;
 		}
 
-		//tratamento de entrada inválida
+		//tratamento de entrada invalida
 		try{
 			GameState* currentState = this->peekState();
 			currentState->handleInput(userInput);

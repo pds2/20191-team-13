@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "helpers.h"
+#include "helpers.hpp"
 #include "menu.hpp"
-#include "battle.h"
-#include "enemy.h"
-#include "enemies/clek.h"
+#include "battle.hpp"
+#include "enemy.hpp"
+#include "enemies/clek.hpp"
 //#include "game_state_map.hpp"
 
 using std::cout;
@@ -47,7 +47,8 @@ void GameStateMenu::handleInput(std::string userInput){
         this->game->pushState(new Battle(this->game, enemy));
         return;
     }
-    //tratamento de entrada inválida
+    
+    //tratamento de entrada invalida
     throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
 }
 
