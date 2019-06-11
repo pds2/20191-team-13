@@ -1,12 +1,14 @@
 #pragma once
-#include <iostream>
+#include "entity.hpp"
 
-class Enemy {
+class Enemy : public Entity {
 protected:
 	int health, attack, defense;
 	int fleeRate;
-public:
-	Enemy(int health, int attack, int defense);
+public:	
+	
+	virtual std::string getType();
+	
 	virtual int getHealth() = 0;
 	virtual int getAttack() = 0;
 	virtual int getFleeRate() = 0;
@@ -14,6 +16,8 @@ public:
 	virtual std::string getName() = 0;
 	virtual std::string getBattleText() = 0;
 	virtual std::string getQuote() = 0;
+
+	Enemy(int health, int attack, int defense);
 	virtual ~Enemy(){};
 };
 

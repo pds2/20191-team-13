@@ -5,7 +5,9 @@ Player::Player(){}
 Player::Player(int health, int attack, int defense):
 	health(health), attack(attack), defense(defense){}
 
-Player::~Player(){}
+std::string Player::getType(){
+	return "jogador";
+}
 
 void Player::setHealth(int health){
 	this->health = health;

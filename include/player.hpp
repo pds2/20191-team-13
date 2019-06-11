@@ -1,14 +1,20 @@
 #pragma once
+#include <string>
+#include "entity.hpp"
 
-class Player{
+class Player : public Entity {
 private:
-	int health, attack, defense;
+	int health = 0, attack = 0, defense = 0;
 public:
-	Player();
-	Player(int health, int attack, int defense);
-
-	~Player();
-
+	virtual std::string getType();
+	/*
+	virtual void interact(){
+        //Fazer em conjunto com Arthur//
+    };
+	virtual void useItem(*vector<Item>){
+        //Fazer em conjunto com Arthur//
+    };
+	*/
 	int getHealth();
 	void setHealth(int health);
 
@@ -19,4 +25,9 @@ public:
 	void setDefense(int defense);
 
 	int takeDamage(int enemyAttack);
+	//não deveria ficar no battle para evitar que player tenha muitas responsabilidades?
+
+	Player();
+	Player(int health, int attack, int defense);
+	~Player(){}
 };

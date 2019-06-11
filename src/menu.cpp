@@ -3,6 +3,7 @@
 #include "helpers.hpp"
 #include "menu.hpp"
 #include "battle.hpp"
+#include "map.hpp"
 #include "enemy.hpp"
 #include "enemies/clek.hpp"
 //#include "game_state_map.hpp"
@@ -48,6 +49,11 @@ void GameStateMenu::handleInput(std::string userInput){
         return;
     }
     
+    if(ui == "m"){
+        this->game->pushState(new Map(10,10));
+        return;
+    }
+
     //tratamento de entrada invalida
     throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
 }

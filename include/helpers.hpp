@@ -13,8 +13,8 @@ public:
 		return str;
 	}
 
-	static int randomPercentage(){
-		return rand() % 100 + 1;
+	static int easyRandom(int n){
+		return rand() % n + 1;
 	}
 
 	static void waitForKey(){

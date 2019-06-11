@@ -108,6 +108,6 @@ void Battle::handleInput(std::string userInput){
 
 
 void Battle::runFromBattle(){
-	int userFlee = Helpers::randomPercentage();
+	int userFlee = Helpers::easyRandom(100);
 	this->playerRan = userFlee <= this->enemy->getFleeRate();
 }
