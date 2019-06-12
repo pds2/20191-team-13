@@ -28,6 +28,4 @@ public:
     GameState* peekState();
 
     void gameLoop();
-
-
 };

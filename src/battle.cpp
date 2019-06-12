@@ -24,6 +24,7 @@ void Battle::display(){
 		infoQueue.pop();
 	}
 
+
 	std::cout << this->enemy->getBattleText() << std::endl;
 		std::cout << "-------------------------" << std::endl;
 		std::cout << "O que voce pretende fazer?" << std::endl;
@@ -47,21 +48,22 @@ void Battle::update(){
 		return;
 	}	
 
-	std::string info = "";
-	info.append(this->enemy->getName()).append(" te ataca!");
-	infoQueue.push(info);
-
-	int playerHealth = this->game->getPlayer()->takeDamage(this->enemy->getAttack());
-	if(playerHealth <= 0){
-		this->battleEnded = true;
-		this->playerWon = false;
-	} else {
-		info = "";
-		info.append("Seu HP agora e").append(std::to_string(playerHealth));
+	if(!this->playerTurn){
+		
+		std::string info = this->enemy->getName() + " te ataca";
 		infoQueue.push(info);
+
+		int playerHealth = this->game->getPlayer()->takeDamage(this->enemy->getAttack());
+		if(playerHealth <= 0){
+			this->battleEnded = true;
+			this->playerWon = false;
+		} else {
+			info = "Seu HP agora e " + std::to_string(playerHealth);
+			infoQueue.push(info);
+		}
 	}
-	
-	this->playerTurn = !this->playerTurn;
+
+	this->playerTurn =  this->game->needsUserInput = !this->playerTurn;
 
 }
 
@@ -74,7 +76,7 @@ void Battle::handleInput(std::string userInput){
 	if(userInput == "a"){
 		int atk = this->game->getPlayer()->getAttack();
 		int enemyRemainingHealth = this->enemy->takeDamage(atk);
-		info.append("Voce atacou o ").append(this->enemy->getName()).append(".");
+		info = "Voce atacou o " + this->enemy->getName() + ".";
 		if(enemyRemainingHealth <= 0){
 			this->battleEnded = this->playerWon = true;
 		}
@@ -82,7 +84,7 @@ void Battle::handleInput(std::string userInput){
 		return;
 	}
 	if(userInput == "i"){
-		info.append(this->enemy->getQuote()).append(".");
+		info = this->enemy->getQuote() + ".";
 		infoQueue.push(info);
 		return;
 	}
