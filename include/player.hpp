@@ -25,7 +25,6 @@ public:
 	void setDefense(int defense);
 
 	int takeDamage(int enemyAttack);
-	//não deveria ficar no battle para evitar que player tenha muitas responsabilidades?
 
 	Player();
 	Player(int health, int attack, int defense);
