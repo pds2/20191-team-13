@@ -31,7 +31,9 @@ void Map::movePlayer(int newPos){
         charMap[newPos] = '@';
     }
 
-    game->getPlayer()->setMapPos(newPos);
+    if(charMap[newPos] != '#'){
+        game->getPlayer()->setMapPos(newPos);
+    }    
     return;
 }
 
@@ -41,7 +43,7 @@ Map::Map(Game* game, int xSize, int ySize){
     this->ySize = ySize;
     this->charMap = new char[xSize*ySize];
 
-    int gameObjs = xSize*ySize <= 100 ? 5 : floor(0.01 * (xSize*ySize));
+    int gameObjs = xSize*ySize <= 100 ? 5 : (3 + floor(0.05 * (xSize*ySize)));
 
     this->numChests = gameObjs;
     this->numEnemies = gameObjs;
@@ -61,14 +63,16 @@ Map::Map(Game* game, int xSize, int ySize){
         charMap[i*xSize+(xSize-1)] = '#';
     }
 
+    srand(time(0));
+
     //inserir entidades para o jogador interagir
-    for(int i=0; i < numChests; i++){
+    for(int i=0; i < numChests; i++){        
         int rand = Helpers::easyRandom(xSize*(ySize-1));
         if (charMap[rand] == '-'){
             charMap[rand] = 'B';
         }
     }
-    for(int i=0; i < numEnemies; i++){
+    for(int i=0; i < numEnemies; i++){        
         int rand = Helpers::easyRandom(xSize*(ySize-1));
         if (charMap[rand] == '-'){
             charMap[rand] = 'M';

@@ -19,8 +19,18 @@ void Battle::display(){
 	while(!infoQueue.empty()){
 		std::cout << "\t[!]" << infoQueue.front() << std::endl;
 		infoQueue.pop();
+		std::cout << "-------------------------" << std::endl;
 	}
 
+	std::cout << "[SEU STATUS]------------0" << std::endl;
+	std::cout << "\t\t|vida: " << this->game->getPlayer()->getHealth() << std::endl;
+	std::cout << "\t\t|AT: " << this->game->getPlayer()->getAttack() << std::endl;
+	std::cout << "\t\t|DEF: " << this->game->getPlayer()->getDefense() << std::endl;
+
+	std::cout << "[MONSTRO]---------------0" << std::endl;
+	std::cout << "\t\t|vida: " << this->enemy->getHealth() << std::endl;
+	std::cout << "\t\t|AT: " << this->enemy->getAttack() << std::endl;
+	std::cout << "------------------------0" << std::endl;
 
 	std::cout << this->enemy->getBattleText() << std::endl;
     std::cout << "-------------------------" << std::endl;
