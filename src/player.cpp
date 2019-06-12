@@ -37,7 +37,7 @@ int Player::getMapPos(){
 	return this->mapPos;
 }
 
-int Player::setMapPos(int pos){
+void Player::setMapPos(int pos){
 	this->mapPos = pos;
 }
 

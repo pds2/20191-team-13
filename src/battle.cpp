@@ -12,10 +12,7 @@ Battle::Battle(Game* game, Enemy* enemy){
 	this->game = game;
 } //Game* game, Enemy* enemy
 
-
-Battle::~Battle(){
-
-}
+Battle::~Battle(){}
 
 void Battle::display(){
 
@@ -26,12 +23,12 @@ void Battle::display(){
 
 
 	std::cout << this->enemy->getBattleText() << std::endl;
-		std::cout << "-------------------------" << std::endl;
-		std::cout << "O que voce pretende fazer?" << std::endl;
-		std::cout << "\t(a)tacar" << std::endl;
-		std::cout << "\t(i)nteragir" << std::endl;
-		std::cout << "\t(u)sar um item" << std::endl;		
-		std::cout << "\t(f)ugir" << std::endl;
+    std::cout << "-------------------------" << std::endl;
+    std::cout << "O que voce pretende fazer?" << std::endl;
+    std::cout << "\t(a)tacar" << std::endl;
+    std::cout << "\t(i)nteragir" << std::endl;
+    std::cout << "\t(u)sar um item" << std::endl;
+    std::cout << "\t(f)ugir" << std::endl;
 
 }
 
@@ -46,10 +43,10 @@ void Battle::update(){
 		Helpers::waitForKey();
 		this->game->popState();
 		return;
-	}	
+	}
 
 	if(!this->playerTurn){
-		
+
 		std::string info = this->enemy->getName() + " te ataca";
 		infoQueue.push(info);
 
@@ -83,6 +80,7 @@ void Battle::handleInput(std::string userInput){
 		infoQueue.push(info);
 		return;
 	}
+	
 	if(userInput == "i"){
 		info = this->enemy->getQuote() + ".";
 		infoQueue.push(info);

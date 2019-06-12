@@ -2,21 +2,34 @@
 #include "map.hpp"
 #include "player.hpp"
 #include "helpers.hpp"
-#include 
 
-void Map::collisionCheck(int newPos){
-    if (charMap[newPos] =='B'){
-        //chamar funcao de interacao(?) this->player->items.push(new item("Bala"))
-    }
-    if (charMap[newPos] == 'M'){
-        //this->game->pushState(new Battle(this->player, map[newPos]))
-    }
-    if (charMap[newPos] == '-'){
+void Map::movePlayer(int newPos){
+    std::string info = "";
+    
+    if (charMap[newPos] =='B'){        
+        //this->player->items.push(new item()); /* no momento em que o jogador abre um baú, um item aleatório é gerado e adicionado ao inventário*/
+        //info = "voce pegou um item! |--> " +  this->player->items.back()->name + "+ " + this->player->items.back()->name + this->player->items.back()->itemEffect;
+        //this->infoQueue.push(info);
 
-    }
-    if (charMap[newPos] == '#'){
+        charMap[player->getMapPos()] = '-';
+        charMap[newPos] = '@';        
 
+    }else if (charMap[newPos] == 'M'){
+
+        std::cout << "\t[!]voce encontrou um monstro!" << std::endl;
+        Helpers::waitForKey();
+        //this->game->pushState(new Battle(this->player, map[newPos]));
+
+        charMap[player->getMapPos()] = '-';
+        charMap[newPos] = '@';
+
+    } else if(charMap[newPos] == '-'){
+        charMap[player->getMapPos()] = '-';
+        charMap[newPos] = '@';
     }
+    
+    player->setMapPos(newPos);
+    return;
 }
 
 Map::Map(int xSize, int ySize){
@@ -28,8 +41,8 @@ Map::Map(int xSize, int ySize){
 
     this->numChests = gameObjs;
     this->numEnemies = gameObjs;
-    
-    //criar jogador 
+
+    //criar jogador
     this->player = new Player(20, 4, 2);
 
     //preencher as bordas com paredes
@@ -66,7 +79,7 @@ Map::Map(int xSize, int ySize){
     while(playerNotSet){
         int rand = Helpers::easyRandom(xSize*(ySize-1));
         if (charMap[rand] == '-'){
-                charMap[rand] = '&';
+                charMap[rand] = '@';
                 this->player->setMapPos(rand);
                 playerNotSet = false;
             }
@@ -82,7 +95,13 @@ void Map::display(){
         }
         std::cout << std::endl;
     }
+
+    while(!this->infoQueue.empty()){
+        std::cout << "/t[!]" << this->infoQueue.front() << std::endl;
+        this->infoQueue.pop();
+    }
 }
+
 void Map::update(){
     return;
 }
@@ -92,15 +111,15 @@ void Map::handleInput(std::string userInput){
     int pos = this->player->getMapPos();
 
     if(ui == "w" || ui == "i"){
-
+        movePlayer(pos-xSize);
     }
     if(ui == "s" || ui == "k"){
-
+        movePlayer(pos+xSize);
     }
     if(ui == "a" || ui == "j"){
-        collisionCheck(pos-1);
+        movePlayer(pos-1);
     }
     if(ui == "d" || ui == "l"){
-        colisionCheck(pos+1);
+        movePlayer(pos+1);
     }
 }

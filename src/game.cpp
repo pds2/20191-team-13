@@ -47,6 +47,7 @@ void Game::gameLoop(){
 	std::string userInput = "";
 	while(true){
 		if (this->state_endgame) break;
+
 		CLEAR_SCREEN();
 		this->peekState()->display();
 
@@ -59,9 +60,8 @@ void Game::gameLoop(){
 			std::cout << "==> ";
 			std::cin >> userInput;
 			if (userInput == "sair"){
-                break;
-			}
-			std::cin.clear();
+				break;
+			}			
 			std::cout << std::endl;
 		}
 

@@ -12,6 +12,7 @@ public:
 	//virtual void useItem(*vector<Item>){
         
     //};
+	
 	int getHealth();
 	void setHealth(int health);
 
