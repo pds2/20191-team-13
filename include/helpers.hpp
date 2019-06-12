@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <time.h>
+#include <ctime>
 
 class Helpers {
 public:
@@ -13,8 +13,7 @@ public:
 		return str;
 	}
 
-	static int easyRandom(int n){
-		srand(time(NULL));
+	static int easyRandom(int n){		
 		return rand() % n + 1;
 	}
 
