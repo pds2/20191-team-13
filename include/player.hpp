@@ -5,16 +5,13 @@
 class Player : public Entity {
 private:
 	int health = 0, attack = 0, defense = 0;
+	int mapPos = 0;
 public:
 	virtual std::string getType();
-	/*
-	virtual void interact(){
-        //Fazer em conjunto com Arthur//
-    };
-	virtual void useItem(*vector<Item>){
-        //Fazer em conjunto com Arthur//
-    };
-	*/
+
+	//virtual void useItem(*vector<Item>){
+        
+    //};
 	int getHealth();
 	void setHealth(int health);
 
@@ -23,6 +20,9 @@ public:
 
 	int getDefense();
 	void setDefense(int defense);
+
+	int getMapPos();
+	void setMapPos(int pos);
 
 	int takeDamage(int enemyAttack);
 	//não deveria ficar no battle para evitar que player tenha muitas responsabilidades?

@@ -33,6 +33,14 @@ int Player::getDefense(){
 	return this->defense;
 }
 
+int Player::getMapPos(){
+	return this->mapPos;
+}
+
+int Player::setMapPos(int pos){
+	this->mapPos = pos;
+}
+
 int Player::takeDamage(int enemyAttack){
 	int damage = ((enemyAttack - this->defense) > 0) ? enemyAttack - this->defense : 1;
 	this->health -= damage;

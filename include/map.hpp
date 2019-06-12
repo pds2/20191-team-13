@@ -9,10 +9,10 @@
 
 class Map : public GameState {
     private:
-        //std::map<Position, Entity*> grid; /* guarda a posicao das entidades em uma 'grade' */
         char* charMap; /* guarda simbolos para imprimir no console */
         int xSize, ySize;
         int numEnemies, numChests;
+        Player* player; /* informacoes sobre o jogador */
 
     public:
         virtual void display();

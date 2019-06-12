@@ -18,17 +18,18 @@ Battle::~Battle(){
 }
 
 void Battle::display(){
-	
-	while(!infoStack.empty()){
-		std::cout << "[!]" << infoStack.top() << std::endl;
-		infoStack.pop();
+
+	while(!infoQueue.empty()){
+		std::cout << "\t[!]" << infoQueue.front() << std::endl;
+		infoQueue.pop();
 	}
 
 	std::cout << this->enemy->getBattleText() << std::endl;
 		std::cout << "-------------------------" << std::endl;
-		std::cout << "O que voce pretende fazer" << std::endl;
+		std::cout << "O que voce pretende fazer?" << std::endl;
 		std::cout << "\t(a)tacar" << std::endl;
 		std::cout << "\t(i)nteragir" << std::endl;
+		std::cout << "\t(u)sar um item" << std::endl;		
 		std::cout << "\t(f)ugir" << std::endl;
 
 }
@@ -37,41 +38,34 @@ void Battle::update(){
 	if(this->playerRan){
 		Helpers::waitForKey();
 		this->game->popState();
-		this->game->needsUserInput = true;
 		return;
 	}
 	if(this->battleEnded){
 		std::cout << (this->playerWon ? "Voce venceu a batalha!!!" : "Voce foi derrotado") << std::endl;
 		Helpers::waitForKey();
 		this->game->popState();
-		this->game->needsUserInput = true;
 		return;
+	}	
+
+	std::string info = "";
+	info.append(this->enemy->getName()).append(" te ataca!");
+	infoQueue.push(info);
+
+	int playerHealth = this->game->getPlayer()->takeDamage(this->enemy->getAttack());
+	if(playerHealth <= 0){
+		this->battleEnded = true;
+		this->playerWon = false;
+	} else {
+		info = "";
+		info.append("Seu HP agora e").append(std::to_string(playerHealth));
+		infoQueue.push(info);
 	}
-
-	if(!this->playerTurn){
-		
-		std::string info = "";
-		info.append(this->enemy->getName()).append(" te ataca");
-		infoStack.push(info);
-
-		int playerHealth = this->game->getPlayer()->takeDamage(this->enemy->getAttack());
-		if(playerHealth <= 0){
-			this->battleEnded = true;
-			this->playerWon = false;
-		} else {
-			info = "";
-			info.append("Seu HP agora e ").append(std::to_string(playerHealth));
-			infoStack.push(info);
-		}
-	}
-
+	
 	this->playerTurn = !this->playerTurn;
 
 }
 
 void Battle::handleInput(std::string userInput){
-
-	if(!this->playerTurn) return;
 
 	std::string info = "";
 
@@ -84,12 +78,12 @@ void Battle::handleInput(std::string userInput){
 		if(enemyRemainingHealth <= 0){
 			this->battleEnded = this->playerWon = true;
 		}
-		infoStack.push(info);
+		infoQueue.push(info);
 		return;
 	}
 	if(userInput == "i"){
 		info.append(this->enemy->getQuote()).append(".");
-		infoStack.push(info);
+		infoQueue.push(info);
 		return;
 	}
 
@@ -98,7 +92,7 @@ void Battle::handleInput(std::string userInput){
 		if(this->playerRan){
 			std::cout << "[!] Voce fugiu da luta!" << std::endl;
 		} else {
-			infoStack.push("Voce nao conseguiu fugir");
+			infoQueue.push("Voce nao conseguiu fugir");
 		}
 		return;
 	}
