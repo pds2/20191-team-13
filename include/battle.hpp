@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stack>
+#include <queue>
 #include <string>
 
 #include "game_state.hpp"
@@ -12,7 +12,7 @@ private:
 	bool playerTurn, playerRan, battleEnded, playerWon;
 	Enemy* enemy;
 	
-	std::stack<std::string> infoStack;
+	std::queue<std::string> infoQueue;
 
 public:
 	Battle();

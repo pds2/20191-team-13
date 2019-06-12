@@ -55,7 +55,7 @@ void Game::gameLoop(){
 			this->errorStack.pop();
 		}
 
-		if(true/**this->needsUserInput*/){
+		if(this->needsUserInput){
 			std::cout << "==> ";
 			std::cin >> userInput;
 			std::cout << std::endl;
