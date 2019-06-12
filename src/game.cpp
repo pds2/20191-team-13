@@ -58,6 +58,10 @@ void Game::gameLoop(){
 		if(true/**this->needsUserInput*/){
 			std::cout << "==> ";
 			std::cin >> userInput;
+			if (userInput == "sair"){
+                break;
+			}
+			std::cin.clear();
 			std::cout << std::endl;
 		}
 

@@ -8,7 +8,7 @@
 class Item : public Entity{
 
     std::string name;
-    std::string type;
+    std::string itemEffect;
     int quantity = 1;
 
     public:
@@ -16,6 +16,6 @@ class Item : public Entity{
         void set_quantity(int quantity);
         int get_quantity();
 
-    Item(std::string name, std::string type);
+    Item();
     ~Item(){};
 };
