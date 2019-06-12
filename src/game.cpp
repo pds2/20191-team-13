@@ -72,8 +72,9 @@ void Game::gameLoop(){
 			userInput = "";
 			currentState->update();
 		}catch (const char* &e){
-			// std::string tmp = e;
 			this->errorStack.push(e);
+		}catch (std::out_of_range& e){
+			this->errorStack.push("por favor digite um numero que aparece na lista");
 		}
 	}
 }

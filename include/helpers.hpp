@@ -14,7 +14,7 @@ public:
 	}
 
 	static int easyRandom(int n){
-		//srand(time(NULL));
+		srand(time(NULL));
 		return rand() % n + 1;
 	}
 

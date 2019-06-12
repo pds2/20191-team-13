@@ -15,8 +15,6 @@ class Map : public GameState {
         int xSize, ySize;        
         int numEnemies, numChests;
 
-        Player* player; /* informacoes sobre o jogador */
-
         std::queue<std::string> infoQueue;
 
     public:
@@ -26,7 +24,7 @@ class Map : public GameState {
 
         void movePlayer(int newPos);
 
-        Map(int xSize, int ySize);
+        Map(Game* game, int xSize, int ySize);
         ~Map(){};
 
 

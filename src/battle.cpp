@@ -87,6 +87,14 @@ void Battle::handleInput(std::string userInput){
 		return;
 	}
 
+	if(userInput == "u"){
+		int option;
+		this->game->getPlayer()->printItems();
+		std::cout << "==> ";
+		std:: cin >> option;
+		this->game->getPlayer()->useItem(option);
+	}
+
 	if(userInput == "f"){
 		runFromBattle();
 		if(this->playerRan){

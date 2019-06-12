@@ -1,4 +1,7 @@
+#include <iostream>
+#include <iterator>
 #include "player.hpp"
+
 
 Player::Player(){}
 
@@ -39,6 +42,45 @@ int Player::getMapPos(){
 
 void Player::setMapPos(int pos){
 	this->mapPos = pos;
+}
+
+void Player::addItem(Item i){
+	this->items.push_back(i);
+}
+
+Item Player::getLastItem(){
+	return this->items.back();
+}
+
+Item Player::getItem(int index){
+	return this->items.at(index);
+}
+
+void Player::printItems(){
+	int i=0;
+	std::cout << "|SEUS ITENS--------------" << std::endl;
+	for(auto it : items){
+		std:: cout << "\t[" << i << "] " << it.getDescription() << std::endl;
+		i++;
+	}
+	std::cout << "-------------------------" << std::endl;
+}
+
+void Player::useItem(int index){
+	Item i = this->items.at(index);
+	
+	if(i.getEffect()=="ATAQUE"){
+		this->attack += i.getIncrement();
+	}
+	if(i.getEffect()=="DEFESA"){
+		this->defense += i.getIncrement();
+	}
+	if(i.getEffect()=="HP"){
+		this->health += i.getIncrement();	
+	} 
+
+	this->items.erase(items.begin()+index);
+	return;
 }
 
 int Player::takeDamage(int enemyAttack){
