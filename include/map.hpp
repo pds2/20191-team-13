@@ -14,6 +14,7 @@ class Map : public GameState {
         char* charMap; /* guarda simbolos para imprimir no console */
         int xSize, ySize;        
         int numEnemies, numChests;
+        int enemyCount;
 
         std::queue<std::string> infoQueue;
 

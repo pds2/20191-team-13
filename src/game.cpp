@@ -47,6 +47,13 @@ void Game::gameLoop(){
 	std::string userInput = "";
 	while(true){
 		if (this->state_endgame) break;
+		if (this->state_win) {
+			std::cout << "|------Vitoria! Voce venceu------|" << std::endl;
+			break;
+		}
+		if (this->state_lose) {
+			std::cout << "|------Voce foi derrotado!-------|";
+		}
 
 		CLEAR_SCREEN();
 		this->peekState()->display();
@@ -85,4 +92,12 @@ Player* Game::getPlayer(){
 
 void Game::quit(){
 	this->state_endgame = true;
+}
+
+void Game::win(){
+	this->state_win = true;
+}
+
+void Game::lose(){
+	this->state_lose = true;
 }

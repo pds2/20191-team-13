@@ -38,7 +38,7 @@ void GameStateMenu::handleInput(std::string userInput){
     }
 
     if (ui == "n"){
-        this->game->pushState(new Map(this->game, 30, 7));
+        this->game->pushState(new Map(this->game, 43, 11));
         return;
     }
 

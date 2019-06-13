@@ -20,6 +20,7 @@ void Map::movePlayer(int newPos){
     }else if (charMap[newPos] == 'M'){
 
         std::cout << "[!]voce encontrou um monstro!" << std::endl;
+        this->enemyCount--;
         Helpers::waitForKey();
         this->game->pushState(new Battle(this->game, new Clek(10,1,1)));
 
@@ -43,10 +44,12 @@ Map::Map(Game* game, int xSize, int ySize){
     this->ySize = ySize;
     this->charMap = new char[xSize*ySize];
 
-    int gameObjs = xSize*ySize <= 100 ? 5 : (3 + floor(0.05 * (xSize*ySize)));
+    int gameObjs = xSize*ySize <= 100 ? 5 : (/*3*/ + floor(0.05 * (xSize*ySize)));
 
     this->numChests = gameObjs;
     this->numEnemies = gameObjs;
+
+    this->enemyCount = 0;
 
     //preencher as bordas com paredes
     for(int i = 0; i<xSize*ySize; i++){
@@ -76,6 +79,7 @@ Map::Map(Game* game, int xSize, int ySize){
         int rand = Helpers::easyRandom(xSize*(ySize-1));
         if (charMap[rand] == '-'){
             charMap[rand] = 'M';
+            this-> enemyCount++;
         }
     }
 
@@ -108,6 +112,12 @@ void Map::display(){
 }
 
 void Map::update(){
+    if(this->enemyCount <=0){
+        this->game->win();
+    }
+    if (this->game->getPlayer()->getHealth()<=0){
+        this->game->lose();
+    }
     return;
 }
 

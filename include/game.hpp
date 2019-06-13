@@ -7,6 +7,8 @@ class GameState;
 class Game{
 private:
     bool state_endgame = 0;
+    bool state_win = 0;
+    bool state_lose = 0;
 
     std::stack<std::string> errorStack;
 
@@ -24,6 +26,8 @@ public:
     Player* getPlayer();
 
     void quit();
+    void win();
+    void lose();
 
     GameState* peekState();
 

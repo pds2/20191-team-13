@@ -19,27 +19,26 @@ void Battle::display(){
 	while(!infoQueue.empty()){
 		std::cout << "\t[!]" << infoQueue.front() << std::endl;
 		infoQueue.pop();
-		std::cout << "-------------------------" << std::endl;
+		std::cout << "|-------------------------" << std::endl;
 	}
 
-	std::cout << "[SEU STATUS]------------0" << std::endl;
-	std::cout << "\t\t|vida: " << this->game->getPlayer()->getHealth() << std::endl;
-	std::cout << "\t\t|AT: " << this->game->getPlayer()->getAttack() << std::endl;
-	std::cout << "\t\t|DEF: " << this->game->getPlayer()->getDefense() << std::endl;
+	std::cout << "|[SEU STATUS]------------0" << std::endl;
+	std::cout << "|\t\t|vida: " << this->game->getPlayer()->getHealth() << std::endl;
+	std::cout << "|\t\t|AT: " << this->game->getPlayer()->getAttack() << std::endl;
+	std::cout << "|\t\t|DEF: " << this->game->getPlayer()->getDefense() << std::endl;
 
-	std::cout << "[MONSTRO]---------------0" << std::endl;
-	std::cout << "\t\t|vida: " << this->enemy->getHealth() << std::endl;
-	std::cout << "\t\t|AT: " << this->enemy->getAttack() << std::endl;
-	std::cout << "------------------------0" << std::endl;
+	std::cout << "|[MONSTRO]---------------0" << std::endl;
+	std::cout << "|\t\t|vida: " << this->enemy->getHealth() << std::endl;
+	std::cout << "|\t\t|AT: " << this->enemy->getAttack() << std::endl;
+	std::cout << "|------------------------0" << std::endl;
 
-	std::cout << this->enemy->getBattleText() << std::endl;
-    std::cout << "-------------------------" << std::endl;
-    std::cout << "O que voce pretende fazer?" << std::endl;
-    std::cout << "\t(a)tacar" << std::endl;
-    std::cout << "\t(i)nteragir" << std::endl;
-    std::cout << "\t(u)sar um item" << std::endl;
-    std::cout << "\t(f)ugir" << std::endl;
-
+	std::cout << "|\t(0-0) " << this->enemy->getBattleText() << std::endl;
+    std::cout << "|-------------------------" << std::endl;
+    std::cout << "|O que voce pretende fazer?" << std::endl;
+    std::cout << "|\t(a)tacar" << std::endl;
+    std::cout << "|\t(i)nteragir" << std::endl;
+    std::cout << "|\t(u)sar um item" << std::endl;
+    std::cout << "|\t(f)ugir" << std::endl;
 }
 
 void Battle::update(){
@@ -75,7 +74,7 @@ void Battle::update(){
 }
 
 void Battle::handleInput(std::string userInput){
-
+    std::cout << userInput << std::endl;
 	std::string info = "";
 
 	userInput = Helpers::lowerString(userInput);
@@ -89,23 +88,17 @@ void Battle::handleInput(std::string userInput){
 		}
 		infoQueue.push(info);
 		return;
-	}
-	
-	if(userInput == "i"){
+	}else if(userInput == "i"){
 		info = this->enemy->getQuote() + ".";
 		infoQueue.push(info);
 		return;
-	}
-
-	if(userInput == "u"){
+	}else if(userInput == "u"){
 		int option;
 		this->game->getPlayer()->printItems();
 		std::cout << "==> ";
 		std:: cin >> option;
 		this->game->getPlayer()->useItem(option);
-	}
-
-	if(userInput == "f"){
+	} else if(userInput == "f"){
 		runFromBattle();
 		if(this->playerRan){
 			std::cout << "[!] Voce fugiu da luta!" << std::endl;
@@ -113,9 +106,10 @@ void Battle::handleInput(std::string userInput){
 			infoQueue.push("Voce nao conseguiu fugir");
 		}
 		return;
+	}else{
+		throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
 	}
-
-	throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
+	return;
 }
 
 
