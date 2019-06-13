@@ -6,7 +6,7 @@
 #include "game_state.hpp"
 #include "game.hpp"
 #include "enemy.hpp"
-/* \gerencia a batalha entre o jogador e um inimigo
+/* \brief gerencia a batalha entre o jogador e um inimigo
 *
 *
 */
