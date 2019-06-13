@@ -15,6 +15,7 @@ Battle::Battle(Game* game, Enemy* enemy){
 Battle::~Battle(){}
 
 void Battle::display(){
+	if(!this->playerTurn) return;
 
 	while(!infoQueue.empty()){
 		std::cout << "\t[!]" << infoQueue.front() << std::endl;
@@ -22,17 +23,17 @@ void Battle::display(){
 		std::cout << "|-------------------------" << std::endl;
 	}
 
-	std::cout << "|[SEU STATUS]------------0" << std::endl;
+	std::cout << "|[SEU STATUS]------------" << std::endl;
 	std::cout << "|\t\t|vida: " << this->game->getPlayer()->getHealth() << std::endl;
 	std::cout << "|\t\t|AT: " << this->game->getPlayer()->getAttack() << std::endl;
 	std::cout << "|\t\t|DEF: " << this->game->getPlayer()->getDefense() << std::endl;
 
-	std::cout << "|[MONSTRO]---------------0" << std::endl;
+	std::cout << "|[MONSTRO]---------------" << std::endl;
 	std::cout << "|\t\t|vida: " << this->enemy->getHealth() << std::endl;
 	std::cout << "|\t\t|AT: " << this->enemy->getAttack() << std::endl;
-	std::cout << "|------------------------0" << std::endl;
+	std::cout << "|------------------------" << std::endl;
 
-	std::cout << "|\t(0-0) " << this->enemy->getBattleText() << std::endl;
+	std::cout << "|\t" << this->enemy->getBattleText() << std::endl;
     std::cout << "|-------------------------" << std::endl;
     std::cout << "|O que voce pretende fazer?" << std::endl;
     std::cout << "|\t(a)tacar" << std::endl;
@@ -42,15 +43,19 @@ void Battle::display(){
 }
 
 void Battle::update(){
+	
 	if(this->playerRan){
 		Helpers::waitForKey();
 		this->game->popState();
+		this->game->needsUserInput = true;
 		return;
 	}
+
 	if(this->battleEnded){
 		std::cout << (this->playerWon ? "Voce venceu a batalha!!!" : "Voce foi derrotado") << std::endl;
 		Helpers::waitForKey();
 		this->game->popState();
+		this->game->needsUserInput = true;
 		return;
 	}
 
@@ -67,6 +72,7 @@ void Battle::update(){
 			info = "Seu HP agora e " + std::to_string(playerHealth);
 			infoQueue.push(info);
 		}
+
 	}
 
 	this->playerTurn =  this->game->needsUserInput = !this->playerTurn;
@@ -74,6 +80,9 @@ void Battle::update(){
 }
 
 void Battle::handleInput(std::string userInput){
+
+	if(!this->playerTurn) return;
+
     std::cout << userInput << std::endl;
 	std::string info = "";
 

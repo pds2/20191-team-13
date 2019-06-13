@@ -1,5 +1,10 @@
 # Team 13 - RPG
 
+### Como rodar
+
+Para rodar o jogo, é necessário ter o g++ e make instalados no sistema. Depois, clone o repositório, e dentro da pasta rode o comando
+
+> make run
 
 ### User stories
 
