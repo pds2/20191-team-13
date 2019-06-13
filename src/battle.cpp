@@ -55,6 +55,8 @@ void Battle::update(){
 	if(this->battleEnded){
 		std::cout << (this->playerWon ? "Voce venceu a batalha!!!" : "Voce foi derrotado") << std::endl;
 		Helpers::waitForKey();
+		if (this->game->getPlayer()->getHealth()<=1) this->game->lose();
+        this->game->lose();
 		this->game->popState();
 		this->game->needsUserInput = true;
 		return;

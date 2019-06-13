@@ -44,7 +44,7 @@ Map::Map(Game* game, int xSize, int ySize){
     this->ySize = ySize;
     this->charMap = new char[xSize*ySize];
 
-    int gameObjs = xSize*ySize <= 100 ? 5 : (/*3*/ + floor(0.05 * (xSize*ySize)));
+    int gameObjs = xSize*ySize <= 100 ? 5 : (floor(0.02 * (xSize*ySize)));
 
     this->numChests = gameObjs;
     this->numEnemies = gameObjs;
@@ -67,7 +67,6 @@ Map::Map(Game* game, int xSize, int ySize){
     }
 
     srand(time(0));
-
     //inserir entidades para o jogador interagir
     for(int i=0; i < numChests; i++){        
         int rand = Helpers::easyRandom(xSize*(ySize-1));
@@ -114,9 +113,6 @@ void Map::display(){
 void Map::update(){
     if(this->enemyCount <=0){
         this->game->win();
-    }
-    if (this->game->getPlayer()->getHealth()<=0){
-        this->game->lose();
     }
     return;
 }

@@ -52,7 +52,8 @@ void Game::gameLoop(){
 			break;
 		}
 		if (this->state_lose) {
-			std::cout << "|------Voce foi derrotado!-------|";
+			std::cout << "|------Voce foi derrotado! mais sorte da proxima vez-------|";
+			break;
 		}
 
 		CLEAR_SCREEN();
