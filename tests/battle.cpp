@@ -35,6 +35,7 @@ TEST_CASE("04 - handleInput shouldn't throw with valid inputs") {
     CHECK_NOTHROW(battle.handleInput("a"));
     CHECK_NOTHROW(battle.handleInput("i"));
     CHECK_NOTHROW(battle.handleInput("f"));
+    CHECK_NOTHROW(battle.handleInput("u"));
 }
 
 TEST_CASE("05 - handleInput should throw with empty input") {

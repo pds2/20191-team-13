@@ -6,7 +6,7 @@
 
 class Player : public Entity {
 private:
-	int health = 0, attack = 0, defense = 0;
+	int health = 0, attack = 0, defense = 0, maxHealth;
 	int mapPos = 0;
 	std::vector<Item> items;
 
@@ -27,7 +27,8 @@ public:
 
 	void addItem(Item i);
 	Item getLastItem();
-	Item getItem(int index);
+	Item* getItem(int index);
+	int getNumberItems();
 
 	void printItems();
 	void useItem(int index);

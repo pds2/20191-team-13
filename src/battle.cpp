@@ -27,8 +27,9 @@ void Battle::display(){
 	std::cout << "|\t\t|vida: " << this->game->getPlayer()->getHealth() << std::endl;
 	std::cout << "|\t\t|AT: " << this->game->getPlayer()->getAttack() << std::endl;
 	std::cout << "|\t\t|DEF: " << this->game->getPlayer()->getDefense() << std::endl;
+	std::cout << "|\t\t|Quantidade de itens: " << this->game->getPlayer()->getNumberItems() << std::endl;
 
-	std::cout << "|[MONSTRO]---------------" << std::endl;
+	std::cout << "|["<< Helpers::upperString(this->enemy->getName())<<"]---------------" << std::endl;
 	std::cout << "|\t\t|vida: " << this->enemy->getHealth() << std::endl;
 	std::cout << "|\t\t|AT: " << this->enemy->getAttack() << std::endl;
 	std::cout << "|------------------------" << std::endl;
@@ -102,11 +103,15 @@ void Battle::handleInput(std::string userInput){
 		infoQueue.push(info);
 		return;
 	}else if(userInput == "u"){
-		int option;
-		this->game->getPlayer()->printItems();
-		std::cout << "==> ";
-		std:: cin >> option;
-		this->game->getPlayer()->useItem(option);
+		if(this->game->getPlayer()->getNumberItems() > 0){
+			int option;
+			this->game->getPlayer()->printItems();
+			std::cout << "==> ";
+			std:: cin >> option;
+			Item* item = this->game->getPlayer()->getItem(option);
+			infoQueue.push("Voce usou " + item->getName()+". " + item->getEffect() + " +" + std::to_string(item->getIncrement()));
+			this->game->getPlayer()->useItem(option);
+		}
 	} else if(userInput == "f"){
 		runFromBattle();
 		if(this->playerRan){
@@ -115,7 +120,7 @@ void Battle::handleInput(std::string userInput){
 			infoQueue.push("Voce nao conseguiu fugir");
 		}
 		return;
-	}else{
+	} else{
 		throw "Opcao invalida! Escolha uma da lista/verifique se digitou corretamente.";
 	}
 	return;

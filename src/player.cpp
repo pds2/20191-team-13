@@ -6,7 +6,9 @@
 Player::Player(){}
 
 Player::Player(int health, int attack, int defense):
-	health(health), attack(attack), defense(defense){}
+	health(health), attack(attack), defense(defense){
+		this->maxHealth = health;
+	}
 
 std::string Player::getType(){
 	return "jogador";
@@ -52,10 +54,14 @@ Item Player::getLastItem(){
 	return this->items.back();
 }
 
-Item Player::getItem(int index){
-	return this->items.at(index);
+Item* Player::getItem(int index){
+	return &this->items.at(index);
 }
 
+
+int Player::getNumberItems(){
+	return this->items.size();
+}
 void Player::printItems(){
 	int i=0;
 	std::cout << "|SEUS ITENS--------------" << std::endl;
@@ -76,7 +82,8 @@ void Player::useItem(int index){
 		this->defense += i.getIncrement();
 	}
 	if(i.getEffect()=="HP"){
-		this->health += i.getIncrement();	
+		int inc = i.getIncrement();
+		this->health = (this->health + inc <= this->maxHealth) ? this->health + inc : this->maxHealth;	
 	} 
 
 	this->items.erase(items.begin()+index);
