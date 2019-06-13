@@ -6,7 +6,10 @@
 #include "game_state.hpp"
 #include "game.hpp"
 #include "enemy.hpp"
-
+/*
+*
+*
+*/
 class Battle: public GameState {
 private:
 	bool playerTurn, playerRan, battleEnded, playerWon;

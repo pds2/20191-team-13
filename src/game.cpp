@@ -19,6 +19,7 @@ Game::Game(){
 }
 
 Game::~Game(){
+	std::cout << "saindo..." << std::endl;
 	while(!this->states.empty()) this->popState();
 }
 

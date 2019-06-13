@@ -5,11 +5,10 @@
 
 
 #include "entity.hpp"
-#include "position.hpp"
 #include "game_state.hpp"
 
 class Map : public GameState {
-    private:        
+    private:
         char* charMap; ///< guarda simbolos para imprimir no console */
         int xSize, ySize; ///< tamanho x,y do mapa */
         int numEnemies, numChests; ///< número aproximado de itens que serão gerados no construtor do mapa */
