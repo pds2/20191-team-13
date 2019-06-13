@@ -15,6 +15,7 @@ public:
 	
 	int getHealth();
 	void setHealth(int health);
+	void setMaxHealth(int health);
 
 	int getAttack();
 	void setAttack(int attack);

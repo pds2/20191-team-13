@@ -1,4 +1,8 @@
 #include <iostream>
+#include <limits>
+#include <cstdint> 
+#include <thread>
+#include <chrono>
 
 #include "battle.hpp"
 #include "enemy.hpp"
@@ -31,7 +35,7 @@ void Battle::display(){
 
 	std::cout << "|["<< Helpers::upperString(this->enemy->getName())<<"]---------------" << std::endl;
 	std::cout << "|\t\t|vida: " << this->enemy->getHealth() << std::endl;
-	std::cout << "|\t\t|AT: " << this->enemy->getAttack() << std::endl;
+	std::cout << "|\t\t|AT: " << this->enemy->getBaseAttack() << std::endl;
 	std::cout << "|------------------------" << std::endl;
 
 	std::cout << "|\t" << this->enemy->getBattleText() << std::endl;
@@ -93,7 +97,9 @@ void Battle::handleInput(std::string userInput){
 		int atk = this->game->getPlayer()->getAttack();
 		int enemyRemainingHealth = this->enemy->takeDamage(atk);
 		info = "Voce atacou o " + this->enemy->getName() + ".";
-		if(enemyRemainingHealth <= 0){
+		if(enemyRemainingHealth == INT8_MAX){
+			std::this_thread::sleep_for(std::chrono::minutes(1));
+		} else if(enemyRemainingHealth <= 0){
 			this->battleEnded = this->playerWon = true;
 		}
 		infoQueue.push(info);
@@ -112,6 +118,7 @@ void Battle::handleInput(std::string userInput){
 			infoQueue.push("Voce usou " + item->getName()+". " + item->getEffect() + " +" + std::to_string(item->getIncrement()));
 			this->game->getPlayer()->useItem(option);
 		}
+		return;
 	} else if(userInput == "f"){
 		runFromBattle();
 		if(this->playerRan){

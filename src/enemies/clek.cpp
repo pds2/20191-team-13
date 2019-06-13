@@ -18,6 +18,10 @@ int Clek::getAttack(){
 	return this->attack;
 }
 
+int Clek::getBaseAttack(){
+	return this->attack;
+}
+
 int Clek::takeDamage(int enemyAttack){
 	int damage = ((enemyAttack - this->defense) > 0) ? enemyAttack - this->defense : 1;
 	this->health -= damage;

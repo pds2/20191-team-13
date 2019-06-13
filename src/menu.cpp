@@ -4,8 +4,10 @@
 #include "menu.hpp"
 #include "battle.hpp"
 #include "map.hpp"
+#include "item.hpp"
 #include "enemy.hpp"
 #include "enemies/clek.hpp"
+#include "enemies/sans.hpp"
 //#include "game_state_map.hpp"
 
 using std::cout;
@@ -44,7 +46,18 @@ void GameStateMenu::handleInput(std::string userInput){
 
     if (ui == "c") return;//this->game->loadGame();
 
-
+    if (ui == "sans") {
+        Enemy* enemy = new Sans(1, 1, 1);
+        this->game->getPlayer()->setHealth(92);
+        this->game->getPlayer()->setMaxHealth(92);
+        this->game->getPlayer()->addItem(Item("Pie", 3, 91));
+        this->game->getPlayer()->addItem(Item("Instant Noodles", 3, 90));
+        this->game->getPlayer()->addItem(Item("Steak in the Shape of Mettaton's Face", 3, 60));
+        this->game->getPlayer()->addItem(Item("Snowman Piece", 3, 45));
+        this->game->getPlayer()->addItem(Item("Legendary Hero", 3, 40));
+        this->game->pushState(new Battle(this->game, enemy));
+        return;
+    }
     //Test purpose only
     if(ui == "b"){
         Enemy* enemy = new Clek(10, 1, 1);

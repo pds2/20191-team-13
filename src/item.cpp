@@ -11,13 +11,13 @@ Item::Item (){
     int rand = Helpers::easyRandom (3);
 
     if (rand == 1){
-        this-> itemEffect = "ATAQUE";
+        this->itemEffect = "ATAQUE";
         this->name = "Vassoura";
     }else if (rand == 2){
-        this-> itemEffect = "DEFESA";
+        this->itemEffect = "DEFESA";
         this->name = "Gelo";
     }else if (rand == 3){
-        this-> itemEffect = "HP";
+        this->itemEffect = "HP";
         this->name = "Laranja";
     }
 
@@ -27,6 +27,24 @@ Item::Item (){
     this->description = this->name + ": " + this->itemEffect + " + " + std::to_string(this->increment);
 }
 
+Item::Item(std::string name, int type, int value){
+    switch (type){
+        case 1:
+            this->itemEffect = "ATAQUE";
+            break;
+        case 2:
+            this->itemEffect = "DEFESA";
+            break;
+        case 3:
+            this->itemEffect = "HP";
+            break;
+    }
+
+    this->name = name;
+    this->increment = value;
+
+    this->description = this->name + ": " + this->itemEffect + " + " + std::to_string(this->increment);
+}
 std::string Item::getName(){
     return this->name;
 }

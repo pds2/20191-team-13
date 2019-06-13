@@ -11,6 +11,7 @@ public:
 	
 	virtual int getHealth() = 0;
 	virtual int getAttack() = 0;
+	virtual int getBaseAttack() = 0;
 	virtual int getFleeRate() = 0;
 	virtual int takeDamage(int enemyAttack) = 0;
 	virtual std::string getName() = 0;

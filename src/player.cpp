@@ -17,6 +17,9 @@ std::string Player::getType(){
 void Player::setHealth(int health){
 	this->health = health;
 }
+void Player::setMaxHealth(int health){
+	this->maxHealth = health;
+}
 
 int Player::getHealth(){
 	return this->health;

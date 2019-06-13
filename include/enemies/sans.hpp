@@ -4,14 +4,14 @@
 #include <vector>
 #include "../enemy.hpp"
 
-class Clek : public Enemy {
+class Sans : public Enemy {
 private:
-	std::string battleText, name;
-	std::vector<std::string> quotes;
-	int quotesIndex;
+	std::string name;
+	std::vector<std::string> quotes, battleTexts;
+	int quotesIndex, battleTextIndex;
 public:
-	Clek(int health, int attack, int defense);
-	~Clek();
+	Sans(int health, int attack, int defense);
+	~Sans();
 	virtual int getHealth();
 	virtual int getAttack();
 	virtual int getBaseAttack();
@@ -20,4 +20,5 @@ public:
 	virtual std::string getName();
 	virtual std::string getBattleText();
 	virtual std::string getQuote();
+	void setBattleTexts();
 };
