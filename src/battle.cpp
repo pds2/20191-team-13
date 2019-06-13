@@ -52,14 +52,6 @@ void Battle::update(){
 		return;
 	}
 
-	if(this->battleEnded){
-		std::cout << (this->playerWon ? "Voce venceu a batalha!!!" : "Voce foi derrotado") << std::endl;
-		Helpers::waitForKey();		
-		this->game->needsUserInput = true;
-		if (this->game->getPlayer()->getHealth()<=1) this->game->lose();
-		this->game->popState();
-		return;
-	}
 
 	if(!this->playerTurn){
 
@@ -75,6 +67,14 @@ void Battle::update(){
 			infoQueue.push(info);
 		}
 
+	}
+	if(this->battleEnded){
+		std::cout << (this->playerWon ? "Voce venceu a batalha!!!" : "Voce foi derrotado") << std::endl;
+		Helpers::waitForKey();		
+		this->game->needsUserInput = true;
+		if (this->game->getPlayer()->getHealth()<=1) this->game->lose();
+		this->game->popState();
+		return;
 	}
 
 	this->playerTurn =  this->game->needsUserInput = !this->playerTurn;
