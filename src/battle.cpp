@@ -86,7 +86,7 @@ void Battle::handleInput(std::string userInput){
 
 	if(!this->playerTurn) return;
 
-    std::cout << userInput << std::endl;
+	std::cout << userInput << std::endl;
 	std::string info = "";
 
 	userInput = Helpers::lowerString(userInput);

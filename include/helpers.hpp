@@ -22,7 +22,7 @@ public:
 		return str;
 	}
 
-	static int easyRandom(int n){		
+	static int easyRandom(int n){
 		return rand() % n + 1;
 	}
 
